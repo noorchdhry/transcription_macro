@@ -1,0 +1,22 @@
+Sub match_id_begin()
+'
+' match_id_begin Macro
+'
+' Keyboard Shortcut: Ctrl+d
+'
+    Do While Not (IsEmpty(ActiveCell))
+        If (IsNumeric(ActiveCell.Value)) Then
+                Selection.Delete Shift:=xlUp
+        ElseIf (IsEmpty(ActiveCell)) Then
+            Exit Do
+        Else
+            ActiveCell.Offset(1, 0).Range("A1").Select
+            Selection.Cut Destination:=ActiveCell.Offset(-1, 1).Range("A1")
+            ActiveCell.Offset(-1, 1).Range("A1").Select
+            ActiveWindow.SmallScroll Down:=-39
+            ActiveCell.Offset(1, 0).Rows("1:1").EntireRow.Select
+            Selection.Delete Shift:=xlUp
+            ActiveCell.Select
+        End If
+    Loop
+End Sub
